@@ -4,7 +4,7 @@ import compression from 'vite-plugin-compression2';
 export default defineConfig({
   base: './',
   plugins: [
-    compression({ algorithm: 'gzip', exclude: [/\.(glb|ogg|mp4|webp|ktx2)$/] }),
+    compression({ algorithms: ['gzip'], exclude: [/\.(glb|ogg|mp4|webp|ktx2)$/] }),
   ],
   resolve: {
     alias: {
@@ -26,8 +26,8 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'three': ['three'],
+        manualChunks(id) {
+          if (id.includes('node_modules/three')) return 'three';
         },
       },
     },

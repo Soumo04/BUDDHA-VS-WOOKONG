@@ -6,36 +6,59 @@
     "moveSpeed": 6,
     "sprintSpeed": 9,
     "dodgeDistance": 4,
-    "dodgeIFrames": 0.3,
+    "iFrameDuration": 0.3,
     "dodgeCooldown": 0.8,
-    "dodgeStaminaCost": 20,
     "staminaRegen": 15,
-    "staminaRegenDelay": 0.5
+    "focusRegen": 2
   },
-  "abilities": {
-    "combo": {
-      "hits": [
-        { "id": "swing1", "damage": 8,  "focusGain": 10, "hitstopMs": 60,  "comboWindow": 1.2, "range": 2.5 },
-        { "id": "swing2", "damage": 10, "focusGain": 12, "hitstopMs": 80,  "comboWindow": 1.2, "range": 2.5 },
-        { "id": "swing3", "damage": 15, "focusGain": 18, "hitstopMs": 120, "comboWindow": 0,   "range": 3.0 }
-      ]
+  "combo": [
+    {
+      "id": "LIGHT_1",
+      "name": "Horizontal Sweep",
+      "damage": 8,
+      "focusGain": 10,
+      "range": 3.5,
+      "hitstopMs": 60,
+      "comboWindow": 1.4
     },
-    "heavy": {
-      "damage": 40,
-      "focusGain": 30,
-      "staminaCost": 30,
-      "cooldown": 2.0,
-      "range": 4.0,
-      "staffScaleFactor": 3.0,
-      "staffMorphDuration": 0.4
+    {
+      "id": "LIGHT_2",
+      "name": "Overhead Slam",
+      "damage": 10,
+      "focusGain": 12,
+      "range": 3.0,
+      "hitstopMs": 80,
+      "comboWindow": 1.4
     },
-    "clone": {
-      "focusCost": 100,
-      "cooldown": 20.0,
-      "duration": 8.0,
-      "aggroDuration": 4.0,
-      "count": 2,
-      "explosionDamage": 12
+    {
+      "id": "LIGHT_3",
+      "name": "Spinning Finisher",
+      "damage": 15,
+      "focusGain": 18,
+      "range": 4.5,
+      "hitstopMs": 140,
+      "comboWindow": 0
     }
+  ],
+  "heavyAttack": {
+    "id": "HEAVY",
+    "name": "Staff Slam",
+    "damage": 40,
+    "focusGain": 30,
+    "range": 5.0,
+    "staminaCost": 30,
+    "cooldown": 2.0,
+    "hitstopMs": 250,
+    "staggers": true
+  },
+  "cloneSkill": {
+    "id": "CLONE",
+    "name": "Shadow Clones",
+    "focusCost": 100,
+    "cooldown": 20.0,
+    "cloneCount": 2,
+    "cloneDuration": 8.0,
+    "cloneDamage": 12,
+    "distractionTime": 4.0
   }
 }
