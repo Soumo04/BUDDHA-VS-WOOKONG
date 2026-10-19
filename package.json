@@ -1,0 +1,26 @@
+{
+  "name": "wukong-vs-buddha",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@vitest/ui": "^5.0.5",
+    "typescript": "~7.0.2",
+    "vite": "^8.3.4",
+    "vite-plugin-compression2": "^2.5.3",
+    "vitest": "^5.0.5"
+  },
+  "dependencies": {
+    "@types/three": "^0.186.0",
+    "three": "^0.186.1"
+  }
+}
+

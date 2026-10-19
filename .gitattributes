@@ -1,0 +1,13 @@
+# Normalise line endings
+* text=auto eol=lf
+
+# Binary — never touch these
+*.glb  binary
+*.ktx2 binary
+*.webp binary
+*.ogg  binary
+*.mp4  binary
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.wasm binary

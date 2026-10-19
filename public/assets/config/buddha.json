@@ -1,0 +1,141 @@
+{
+  "boss": {
+    "maxHp": 2000,
+    "defenceMultiplier": 0.8,
+    "phase2Threshold": 0.66,
+    "phase3Threshold": 0.33,
+    "transitionDuration": 2.0,
+    "scaleRelativeToPlayer": 3.5
+  },
+  "phases": {
+    "1": {
+      "speedMultiplier": 1.0,
+      "attackRotation": ["P1_PALM", "P1_SUTRA", "P1_SWEEP"],
+      "idleTime": [1.5, 2.5]
+    },
+    "2": {
+      "speedMultiplier": 1.25,
+      "attackRotation": ["P1_PALM", "P2_LOTUS", "P1_SUTRA", "P2_GUARDIAN", "P1_SWEEP", "P2_BARRIER"],
+      "idleTime": [1.0, 2.0]
+    },
+    "3": {
+      "speedMultiplier": 1.5,
+      "attackRotation": ["P3_STOMP", "P1_PALM", "P3_DIVINE", "P2_LOTUS", "P3_MOUNTAIN", "P1_SWEEP", "P2_BARRIER"],
+      "idleTime": [0.6, 1.4]
+    }
+  },
+  "attacks": {
+    "P1_PALM": {
+      "id": "P1_PALM",
+      "name": "Giant Palm Slam",
+      "telegraphDuration": 1.5,
+      "attackDuration": 0.6,
+      "recoveryDuration": 1.2,
+      "damage": 25,
+      "cooldown": 4.0,
+      "hitRadius": 4.0,
+      "telegraphType": "shadow_ring",
+      "color": "#ffd60a"
+    },
+    "P1_SUTRA": {
+      "id": "P1_SUTRA",
+      "name": "Sutra Ring Volley",
+      "telegraphDuration": 2.0,
+      "attackDuration": 1.5,
+      "recoveryDuration": 1.5,
+      "damage": 10,
+      "cooldown": 6.0,
+      "projectileCount": 3,
+      "projectileSpeed": 8,
+      "telegraphType": "orbit_rings",
+      "color": "#ffb703"
+    },
+    "P1_SWEEP": {
+      "id": "P1_SWEEP",
+      "name": "Arm Sweep",
+      "telegraphDuration": 1.2,
+      "attackDuration": 0.8,
+      "recoveryDuration": 1.0,
+      "damage": 20,
+      "cooldown": 5.0,
+      "hitArc": 180,
+      "hitRange": 6.0,
+      "telegraphType": "arm_glow",
+      "color": "#ffd60a"
+    },
+    "P2_LOTUS": {
+      "id": "P2_LOTUS",
+      "name": "Lotus Projectile Burst",
+      "telegraphDuration": 1.5,
+      "attackDuration": 1.0,
+      "recoveryDuration": 1.0,
+      "damage": 15,
+      "cooldown": 5.0,
+      "projectileCount": 5,
+      "projectileSpeed": 10,
+      "telegraphType": "lotus_spin",
+      "color": "#e8a0bf"
+    },
+    "P2_GUARDIAN": {
+      "id": "P2_GUARDIAN",
+      "name": "Spirit Guardian Summon",
+      "telegraphDuration": 2.0,
+      "attackDuration": 0.5,
+      "recoveryDuration": 0.5,
+      "damage": 10,
+      "cooldown": 12.0,
+      "addCount": 2,
+      "telegraphType": "portal_glow",
+      "color": "#9d8df1"
+    },
+    "P2_BARRIER": {
+      "id": "P2_BARRIER",
+      "name": "Golden Barrier",
+      "telegraphDuration": 1.0,
+      "attackDuration": 0.5,
+      "recoveryDuration": 0.5,
+      "damage": 0,
+      "cooldown": 15.0,
+      "barrierDuration": 6.0,
+      "telegraphType": "full_body_glow",
+      "color": "#ffd60a"
+    },
+    "P3_MOUNTAIN": {
+      "id": "P3_MOUNTAIN",
+      "name": "Five Elements Mountain",
+      "telegraphDuration": 3.0,
+      "attackDuration": 1.0,
+      "recoveryDuration": 2.0,
+      "damage": 60,
+      "cooldown": 20.0,
+      "hitRadius": 8.0,
+      "telegraphType": "rune_circle",
+      "color": "#e63946"
+    },
+    "P3_STOMP": {
+      "id": "P3_STOMP",
+      "name": "Ground Shockwave",
+      "telegraphDuration": 1.0,
+      "attackDuration": 0.5,
+      "recoveryDuration": 1.0,
+      "damage": 30,
+      "cooldown": 4.0,
+      "shockwaveRadius": 12.0,
+      "shockwaveSpeed": 14.0,
+      "telegraphType": "foot_glow",
+      "color": "#ff4800"
+    },
+    "P3_DIVINE": {
+      "id": "P3_DIVINE",
+      "name": "Divine Light Ray",
+      "telegraphDuration": 1.5,
+      "attackDuration": 1.5,
+      "recoveryDuration": 1.0,
+      "damage": 20,
+      "cooldown": 7.0,
+      "sweepArc": 180,
+      "telegraphType": "beam_charge",
+      "color": "#ffffff"
+    }
+  }
+}

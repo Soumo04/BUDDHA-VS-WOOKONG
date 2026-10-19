@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="description" content="Wukong vs Buddha — a third-person 3D boss battle. Sun Wukong faces the Tathagata in an epic clash above the clouds." />
+    <meta name="theme-color" content="#0a0608" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Wukong vs Buddha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Serif+SC:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Three.js canvas is appended here by main.ts -->
+    <div id="app">
+      <canvas id="game-canvas"></canvas>
+
+      <!-- HUD Layer (DOM overlay) -->
+      <div id="hud" class="hud hidden">
+        <!-- Player stats -->
+        <div id="player-stats" class="player-stats">
+          <div class="stat-row" id="hp-row">
+            <span class="stat-label">HP</span>
+            <div class="stat-bar-bg">
+              <div class="stat-bar" id="hp-bar" style="width:100%;background:linear-gradient(90deg,#e63946,#ff6b6b)"></div>
+            </div>
+          </div>
+          <div class="stat-row" id="stamina-row">
+            <span class="stat-label">ST</span>
+            <div class="stat-bar-bg">
+              <div class="stat-bar" id="stamina-bar" style="width:100%;background:linear-gradient(90deg,#2dc653,#74c69d)"></div>
+            </div>
+          </div>
+          <div class="stat-row" id="focus-row">
+            <span class="stat-label">⬟</span>
+            <div class="stat-bar-bg focus-bg">
+              <div class="stat-bar" id="focus-bar" style="width:0%;background:linear-gradient(90deg,#ffd60a,#ffb703)"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Boss HP -->
+        <div id="boss-hp-container" class="boss-hp-container">
+          <div class="boss-name">The Tathagata Buddha</div>
+          <div class="boss-phase-row">
+            <div class="boss-hp-bg">
+              <div class="boss-hp-fill" id="boss-hp-bar"></div>
+              <div class="boss-hp-ghost" id="boss-hp-ghost"></div>
+            </div>
+            <div class="phase-badge" id="phase-badge">I</div>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div id="skill-bar" class="skill-bar">
+          <div class="skill-icon" id="skill-attack" title="Attack">
+            <span class="skill-key">LMB</span>
+            <div class="skill-icon-inner">⚔</div>
+          </div>
+          <div class="skill-icon" id="skill-heavy" title="Heavy Attack">
+            <span class="skill-key">RMB</span>
+            <div class="skill-icon-inner">💥</div>
+          </div>
+          <div class="skill-icon" id="skill-dodge" title="Dodge">
+            <span class="skill-key">SPC</span>
+            <div class="skill-icon-inner">☁</div>
+          </div>
+          <div class="skill-icon" id="skill-clone" title="Clone Skill">
+            <span class="skill-key">Q</span>
+            <div class="skill-icon-inner">分</div>
+            <div class="skill-cooldown-overlay" id="clone-cooldown"></div>
+          </div>
+        </div>
+
+        <!-- Combo counter -->
+        <div id="combo-counter" class="combo-counter hidden">
+          <span id="combo-number">0</span>
+          <span class="combo-label">COMBO</span>
+        </div>
+
+        <!-- Lock-on reticle (positioned via JS) -->
+        <div id="lock-on-reticle" class="lock-on-reticle hidden"></div>
+      </div>
+
+      <!-- Mobile controls -->
+      <div id="mobile-controls" class="mobile-controls hidden">
+        <div id="joystick-zone" class="joystick-zone">
+          <div id="joystick-base" class="joystick-base">
+            <div id="joystick-knob" class="joystick-knob"></div>
+          </div>
+        </div>
+        <div id="action-buttons" class="action-buttons">
+          <button class="action-btn" id="btn-dodge">☁</button>
+          <button class="action-btn" id="btn-heavy">💥</button>
+          <button class="action-btn" id="btn-attack">⚔</button>
+          <button class="action-btn" id="btn-clone">分</button>
+        </div>
+      </div>
+
+      <!-- Screen overlays -->
+      <div id="title-screen" class="screen title-screen">
+        <div class="title-content">
+          <div class="title-subtitle">The Great Sage Equal to Heaven</div>
+          <h1 class="title-main">悟空<br/><span class="title-vs">VS</span><br/>如来</h1>
+          <div class="title-english">WUKONG vs BUDDHA</div>
+          <button class="start-btn glow-btn" id="btn-start">BEGIN THE BATTLE</button>
+          <button class="settings-btn" id="btn-settings">⚙ Settings</button>
+        </div>
+        <div class="title-bg-particles" id="title-particles"></div>
+      </div>
+
+      <div id="victory-screen" class="screen result-screen hidden">
+        <div class="result-content victory">
+          <div class="result-glyph">☀</div>
+          <h2 class="result-title">VICTORY</h2>
+          <p class="result-sub">The Heavens tremble beneath your feet.</p>
+          <button class="start-btn glow-btn" id="btn-restart-victory">FIGHT AGAIN</button>
+        </div>
+      </div>
+
+      <div id="defeat-screen" class="screen result-screen hidden">
+        <div class="result-content defeat">
+          <div class="result-glyph">⛰</div>
+          <h2 class="result-title">DEFEATED</h2>
+          <p class="result-sub">Five Elements Mountain holds you once more.</p>
+          <button class="start-btn" id="btn-restart-defeat">TRY AGAIN</button>
+        </div>
+      </div>
+
+      <div id="pause-screen" class="screen pause-screen hidden">
+        <div class="pause-content">
+          <h2>PAUSED</h2>
+          <button class="menu-btn" id="btn-resume">Resume</button>
+          <div class="settings-group">
+            <label>Music Volume
+              <input type="range" id="music-vol" min="0" max="100" value="70" />
+            </label>
+            <label>SFX Volume
+              <input type="range" id="sfx-vol" min="0" max="100" value="90" />
+            </label>
+            <label>Graphics Quality
+              <select id="quality-select">
+                <option value="high">High</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </label>
+          </div>
+          <button class="menu-btn danger" id="btn-quit">Quit to Title</button>
+        </div>
+      </div>
+
+      <!-- Loading screen -->
+      <div id="loading-screen" class="screen loading-screen">
+        <div class="loading-content">
+          <div class="loading-title">悟空 VS 如来</div>
+          <div class="loading-bar-bg">
+            <div class="loading-bar-fill" id="loading-bar"></div>
+          </div>
+          <div class="loading-text" id="loading-text">Summoning the clouds…</div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

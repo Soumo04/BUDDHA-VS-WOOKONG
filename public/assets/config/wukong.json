@@ -1,0 +1,41 @@
+{
+  "player": {
+    "maxHp": 100,
+    "maxStamina": 100,
+    "maxFocus": 100,
+    "moveSpeed": 6,
+    "sprintSpeed": 9,
+    "dodgeDistance": 4,
+    "dodgeIFrames": 0.3,
+    "dodgeCooldown": 0.8,
+    "dodgeStaminaCost": 20,
+    "staminaRegen": 15,
+    "staminaRegenDelay": 0.5
+  },
+  "abilities": {
+    "combo": {
+      "hits": [
+        { "id": "swing1", "damage": 8,  "focusGain": 10, "hitstopMs": 60,  "comboWindow": 1.2, "range": 2.5 },
+        { "id": "swing2", "damage": 10, "focusGain": 12, "hitstopMs": 80,  "comboWindow": 1.2, "range": 2.5 },
+        { "id": "swing3", "damage": 15, "focusGain": 18, "hitstopMs": 120, "comboWindow": 0,   "range": 3.0 }
+      ]
+    },
+    "heavy": {
+      "damage": 40,
+      "focusGain": 30,
+      "staminaCost": 30,
+      "cooldown": 2.0,
+      "range": 4.0,
+      "staffScaleFactor": 3.0,
+      "staffMorphDuration": 0.4
+    },
+    "clone": {
+      "focusCost": 100,
+      "cooldown": 20.0,
+      "duration": 8.0,
+      "aggroDuration": 4.0,
+      "count": 2,
+      "explosionDamage": 12
+    }
+  }
+}
